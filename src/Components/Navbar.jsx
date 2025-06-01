@@ -35,7 +35,7 @@ const Navbar = () => {
 }
 
     {
-      user ? <Link to={'/usermanagement'}><li><h2>Admin Panel</h2></li></Link>: ''
+      user ? <Link to={'/Dashboard/usermanagement'}><li><h2>Admin Panel</h2></li></Link>: ''
     }
   
    

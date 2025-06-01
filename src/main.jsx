@@ -26,6 +26,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import Wishlist from './Pages/WishList/Wishlist.jsx';
+import Dashboard from './Components/Dashboard/Dashboard.jsx';
 
 const queryClient = new QueryClient();
 
@@ -50,10 +51,6 @@ const router = createBrowserRouter([
       {
         path:"/Wishlist",
         element:<Wishlist></Wishlist>
-      },
-      {
-        path: '/usermanagement',
-        element: <PrivateRoute><UserHome /></PrivateRoute>,
       },
       {
         path: '/userslist',
@@ -91,6 +88,18 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path:"Dashboard",
+    element:<Dashboard></Dashboard>,
+    children:[
+      
+      {
+        path: '/Dashboard/usermanagement',
+        element: <PrivateRoute><UserHome /></PrivateRoute>,
+      },
+      
+    ]
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(
