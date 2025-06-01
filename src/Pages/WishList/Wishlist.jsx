@@ -1,13 +1,28 @@
 import useWishTanStackQuery from "../../Hook/useWishTanStackQuery";
 import { FaTrashAlt } from "react-icons/fa";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import useAxiosPublic from "../../Hook/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Wishlist = () => {
   const [wish, refetch] = useWishTanStackQuery();
+  const axiosPublic = useAxiosPublic();
 
-  useEffect(() => {
-    console.log(wish);
-  }, [wish]);
+  const handleDelete = async (id) => {
+    const res = await axiosPublic.delete(`/wish/${id}`);
+    console.log(res.data);
+    if (res.data.acknowledged=== true) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: " Successfully Delete!",
+        showConfirmButton: false,
+        timer: 1100,
+      });
+    }
+     refetch();
+  };
 
   return (
     <div className="p-6 bg-white min-h-screen">
@@ -23,7 +38,7 @@ const Wishlist = () => {
               <th className="py-3 px-4 text-left">Tour Title</th>
               <th className="py-3 px-4 text-left">Location</th>
               <th className="py-3 px-4 text-left">Days</th>
-
+              <th className="py-3 px-4 text-left">Book</th>
               <th className="py-3 px-4 text-center">Action</th>
             </tr>
           </thead>
@@ -50,12 +65,19 @@ const Wishlist = () => {
                 <td className="py-3 px-4 text-gray-700">
                   {item.total_days} Days
                 </td>
-
+                <td className="py-3 px-4 text-center">
+                  <Link
+                    to={`/book/${item._id}`}
+                    className=" btn text-black bg-yellow-200  hover:bg-sky-400 transition"
+                  >
+                    Book Now
+                  </Link>
+                </td>
                 <td className="py-3 px-4 text-center">
                   <button
-                    onClick={() => console.log("Delete", item._id)}
+                    onClick={() => handleDelete(item._id)}
                     className="text-red-500 hover:text-red-700 transition"
-                    title="Delete"
+                    
                   >
                     <FaTrashAlt size={18} />
                   </button>

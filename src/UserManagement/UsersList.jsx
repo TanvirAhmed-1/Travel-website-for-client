@@ -9,8 +9,6 @@ import userTanstackQuery from "../Hook/userTanstackQuery";
 const UsersList = () => {
   const AxiosSecure = useAxiosSecure();
   const [user, refetch] = userTanstackQuery();
-  const [users, setUsers] = useState([]);
-  setUsers(user);
   const handleDelete = (_id) => {
     fetch(`http://localhost:5000/users/${_id}`, {
       method: "DELETE",
@@ -28,31 +26,67 @@ const UsersList = () => {
       });
   };
 
-  const handleCreate = async (id) => {
-    userdata = {
-      ...user,
-      role: Admin,
+  const handleCreate = async (v) => {
+  const{_id, ...data}=v
+    const userData = {
+      ...data,
+      role: "Admin",
     };
-    const res = await AxiosSecure.patch(`/users/${id}`);
-    console.log(res.data);
-    refetch();
-    setUsers(res.data);
+    try {
+      const res = await AxiosSecure.patch(`/users/${v._id}`, userData );
+      console.log(res.data);
+      refetch();
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "User Role is Update !",
+        showConfirmButton: false,
+        timer: 1100,
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
-  const handleCreateUser = async (id) => {
-    userdata = {
-      ...user,
-      role: User,
+  const handleCreateUser = async (v) => {
+
+    const{_id, ...data}=v
+    const userData = {
+      ...data,
+      role: "User",
     };
-    const res = await AxiosSecure.patch(`/users/${id}`);
-    console.log(res.data);
-    refetch();
-    setUsers(res.data);
+
+
+    try {
+      const res = await AxiosSecure.patch(`/users/${v._id}`, userData);
+      console.log(res.data);
+      refetch();
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "User role has been updated!",
+        showConfirmButton: false,
+        timer: 1100,
+      });
+    } catch (error) {
+      console.error("Error updating user role:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+    }
   };
 
   return (
     <div>
-      <UserManagementNavbar></UserManagementNavbar>
+<div className="pt-14 pb-6 text-center">
+  <h1 className="text-2xl font-semibold inline-block border-t-2 border-b-2 border-green-600 py-1 px-4">
+    Manage Users
+  </h1>
+</div>
+
 
       <div className="overflow-x-auto">
         <table className="table table-zebra">
@@ -69,24 +103,24 @@ const UsersList = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {users.map((v, index) => (
+            {user?.map((v, index) => (
               <tr key={v._id} className=" text-xl text-black bg-white">
                 <td>{index + 1}</td>
                 <td>{v.name}</td>
                 <td>{v.email}</td>
-                <td>{v?.role || "User"}</td>
+                <td className={`${v?.role==="Admin"? "text-green-500 font-semibold " : "text-black"}`}>{v?.role || "User"}</td>
                 <td>
                   {v?.role === "Admin" ? (
                     <button
-                      onClick={() => handleCreateUser(v._id)}
-                      className="btn bg-green-400"
+                      onClick={() =>handleCreateUser(v)}
+                      className="btn bg-green-300"
                     >
                       Create User
                     </button>
                   ) : (
                     <button
-                      onClick={() => handleCreate(v._id)}
-                      className="btn bg-green-400"
+                      onClick={() =>handleCreate(v)}
+                      className="btn bg-green-300"
                     >
                       Create Admin
                     </button>

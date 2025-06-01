@@ -1,5 +1,4 @@
-import React from 'react';
-import Navbar from '../../Components/Navbar';
+
 import { useLoaderData } from 'react-router-dom';
 import TourCard from './TourCard';
 

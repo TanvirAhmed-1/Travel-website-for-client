@@ -1,85 +1,151 @@
-
-import Navbar from "../../Components/Navbar";
 import { useLoaderData } from "react-router-dom";
+import { useState, useEffect } from "react";
+import useAxiosPublic from "../../Hook/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Book = () => {
-    const tourData=useLoaderData();
-    // console.log(email)
-    console.log(tourData)
-    const handleBook = e=>{
-        e.preventDefault()
-        const form = e.target;
-        const firstName = form.firstName.value;
-        console.log(firstName)
+  const tourData = useLoaderData();
+  const axiosPublic = useAxiosPublic();
+
+  const [today, setToday] = useState("");
+  const [checkInDate, setCheckInDate] = useState("");
+
+console.log(tourData)
+
+  useEffect(() => {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, "0");
+    const dd = String(now.getDate()).padStart(2, "0");
+    const formattedToday = `${yyyy}-${mm}-${dd}`;
+    setToday(formattedToday);
+  }, []);
+
+  const handleBook = async (e) => {
+    e.preventDefault();
+    const{_id, ...Data}=tourData
+    const form = e.target;
+    const bookingInfo = {
+      ...Data,
+      firstName: form.firstName.value,
+      lastName: form.lastName.value,
+      phone: form.phone.value,
+      email: form.email.value,
+      checkIn: form.checkIn.value,
+      checkOut: form.checkOut.value,
+    };
+
+    // Validate dates
+    if (bookingInfo.checkOut <= bookingInfo.checkIn) {
+      alert("Check-out date must be after check-in date.");
+      return;
     }
-    
+
+    console.log("Booking Info:", bookingInfo);
+    const res = await axiosPublic.post(`/book`, bookingInfo);
+    console.log(res.data);
+      if (res.data?.insertedId || res.data?.acknowledged) {
+      Swal.fire({
+        icon: "success",
+        title: "Booking Successful!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+      form.reset();
+
+    form.reset();
+  };
+
   return (
     <div>
       <h2 className="text-center text-4xl my-10">Book Desired Packages</h2>
-      <section className="p-6 dark:bg-gray-100 dark:text-gray-900 ">
-        <form
-        onSubmit={handleBook}
-          noValidate=""
-          action=""
-          className="  mx-auto space-y-12"
-        >
-          <fieldset className="grid grid-cols-2  gap-6 p-6 rounded-md shadow-sm dark:bg-gray-50">
-           
-            <div className="grid grid-cols-6 justify-center gap-4 col-span-full lg:col-span-3">
-              <div className="col-span-full sm:col-span-3">
-                <label htmlFor="firstname" className="text-sm">
-                  First name
-                </label>
-                <input
-                  name="firstName"
-                  type="text"
-                  placeholder="First name"
-                  className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
-                />
-              </div>
-              <div className="col-span-full sm:col-span-3">
-                <label htmlFor="lastname" className="text-sm">
-                  Last name
-                </label>
-                <input
-                  name="lastName"
-                  type="text"
-                  placeholder="Last name"
-                  className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
-                />
-              </div>
-              <div className="col-span-full sm:col-span-3">
-                <label htmlFor="phone" className="text-sm">
-                  Phone
-                </label>
-                <input
-                  
-                  type="text"
-                  placeholder="Phone"
-                  name="phone"
-                  className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
-                />
-              </div>
-             
-              <div className="col-span-full sm:col-span-3 form-control">
-                <label htmlFor="email" className="text-sm">
-                  Email
-                </label>
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                  className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
-                />
-              </div>
-              <div className="form-control col-span-full">
-                <input type="submit" className="btn btn-primary bg-yellow-300 border-none " value="Book" />
+      <section className="p-6 dark:bg-gray-100 dark:text-gray-900">
+        <form onSubmit={handleBook} className="max-w-4xl mx-auto space-y-12">
+          <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-md shadow-sm bg-white border border-gray-200">
+            {/* First Name */}
+            <div className="flex flex-col">
+              <label className="text-sm mb-1">First name</label>
+              <input
+                name="firstName"
+                type="text"
+                placeholder="First name"
+                required
+                className="w-full rounded-md border border-gray-300 p-2 focus:ring focus:ring-yellow-300"
+              />
+            </div>
 
-              </div>
-             
+            {/* Last Name */}
+            <div className="flex flex-col">
+              <label className="text-sm mb-1">Last name</label>
+              <input
+                name="lastName"
+                type="text"
+                placeholder="Last name"
+                required
+                className="w-full rounded-md border border-gray-300 p-2 focus:ring focus:ring-yellow-300"
+              />
+            </div>
+
+            {/* Phone */}
+            <div className="flex flex-col">
+              <label className="text-sm mb-1">Phone</label>
+              <input
+                name="phone"
+                type="text"
+                placeholder="Phone"
+                required
+                className="w-full rounded-md border border-gray-300 p-2 focus:ring focus:ring-yellow-300"
+              />
+            </div>
+
+            {/* Email */}
+            <div className="flex flex-col">
+              <label className="text-sm mb-1">Email</label>
+              <input
+                name="email"
+                type="email"
+                placeholder="Email"
+                required
+                defaultValue={tourData?.email || ""}
+                className="w-full rounded-md border border-gray-300 p-2 focus:ring focus:ring-yellow-300"
+              />
+            </div>
+
+            {/* Check-In Date */}
+            <div className="flex flex-col">
+              <label className="text-sm mb-1">Check-in Date</label>
+              <input
+                name="checkIn"
+                type="date"
+                min={today}
+                required
+                onChange={(e) => setCheckInDate(e.target.value)}
+                className="w-full rounded-md border border-gray-300 p-2 focus:ring focus:ring-yellow-300"
+              />
+            </div>
+
+            {/* Check-Out Date */}
+            <div className="flex flex-col">
+              <label className="text-sm mb-1">Check-out Date</label>
+              <input
+                name="checkOut"
+                type="date"
+                min={checkInDate || today}
+                required
+                className="w-full rounded-md border border-gray-300 p-2 focus:ring focus:ring-yellow-300"
+              />
             </div>
           </fieldset>
-         
+
+          {/* Submit Button */}
+          <div className="flex justify-center">
+            <input
+              type="submit"
+              value="Book"
+              className="btn bg-yellow-300 text-black border-none px-6 py-2 rounded-md hover:bg-yellow-400 transition"
+            />
+          </div>
         </form>
       </section>
     </div>
