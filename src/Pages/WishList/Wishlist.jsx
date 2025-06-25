@@ -12,7 +12,7 @@ const Wishlist = () => {
   const handleDelete = async (id) => {
     const res = await axiosPublic.delete(`/wish/${id}`);
     console.log(res.data);
-    if (res.data.acknowledged=== true) {
+    if (res.data.acknowledged === true) {
       Swal.fire({
         position: "center",
         icon: "success",
@@ -21,7 +21,7 @@ const Wishlist = () => {
         timer: 1100,
       });
     }
-     refetch();
+    refetch();
   };
 
   return (
@@ -39,6 +39,7 @@ const Wishlist = () => {
               <th className="py-3 px-4 text-left">Location</th>
               <th className="py-3 px-4 text-left">Days</th>
               <th className="py-3 px-4 text-left">Book</th>
+              <th className="py-3 px-4 text-left">Details</th>
               <th className="py-3 px-4 text-center">Action</th>
             </tr>
           </thead>
@@ -67,17 +68,26 @@ const Wishlist = () => {
                 </td>
                 <td className="py-3 px-4 text-center">
                   <Link
-                    to={`/book/${item._id}`}
+                    to={`/book/${item.locationId}`}
                     className=" btn text-black bg-yellow-200  hover:bg-sky-400 transition"
                   >
                     Book Now
                   </Link>
                 </td>
+
+                <td className="py-3 px-4 text-center">
+                  <Link
+                    to={`/addData/${item.locationId}`}
+                    className=" btn text-black hover:rounded-lg bg-yellow-200  hover:bg-sky-400 transition"
+                  >
+                    Details
+                  </Link>
+                </td>
+
                 <td className="py-3 px-4 text-center">
                   <button
                     onClick={() => handleDelete(item._id)}
                     className="text-red-500 hover:text-red-700 transition"
-                    
                   >
                     <FaTrashAlt size={18} />
                   </button>

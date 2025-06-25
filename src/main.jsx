@@ -22,6 +22,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Wishlist from "./Pages/WishList/Wishlist.jsx";
 import Dashboard from "./Components/Dashboard/Dashboard.jsx";
 import Booking from "./Components/Dashboard/Booking.jsx";
+import ManageBook from './Components/Dashboard/ManageBook';
 
 const queryClient = new QueryClient();
 
@@ -105,9 +106,13 @@ const router = createBrowserRouter([
         path: "/Dashboard/addData",
         element: <AddData />,
       },
-            {
+      {
         path: "/Dashboard/bookPlace",
         element: <Booking></Booking>,
+      },
+            {
+        path: "/Dashboard/ManageBook",
+        element:<ManageBook></ManageBook>
       },
     ],
   },

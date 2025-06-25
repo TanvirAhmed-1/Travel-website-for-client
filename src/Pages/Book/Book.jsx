@@ -1,25 +1,30 @@
 import { useLoaderData } from "react-router-dom";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
 import Swal from "sweetalert2";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Book = () => {
+  const{user}=useContext(AuthContext)
   const tourData = useLoaderData();
   const axiosPublic = useAxiosPublic();
 
-  const [today, setToday] = useState("");
-  const [checkInDate, setCheckInDate] = useState("");
+  // const [today, setToday] = useState("");
+  // const [checkInDate, setCheckInDate] = useState("");
 
 console.log(tourData)
 
-  useEffect(() => {
-    const now = new Date();
-    const yyyy = now.getFullYear();
-    const mm = String(now.getMonth() + 1).padStart(2, "0");
-    const dd = String(now.getDate()).padStart(2, "0");
-    const formattedToday = `${yyyy}-${mm}-${dd}`;
-    setToday(formattedToday);
-  }, []);
+// user chose tours date
+
+  // useEffect(() => {
+  //   const now = new Date();
+  //   const yyyy = now.getFullYear();
+  //   const mm = String(now.getMonth() + 1).padStart(2, "0");
+  //   const dd = String(now.getDate()).padStart(2, "0");
+  //   const formattedToday = `${yyyy}-${mm}-${dd}`;
+  //   setToday(formattedToday);
+  // }, []);
 
   const handleBook = async (e) => {
     e.preventDefault();
@@ -31,8 +36,9 @@ console.log(tourData)
       lastName: form.lastName.value,
       phone: form.phone.value,
       email: form.email.value,
-      checkIn: form.checkIn.value,
-      checkOut: form.checkOut.value,
+      booking_states: "pending",
+      // checkIn: form.checkIn.value,
+      // checkOut: form.checkOut.value,
     };
 
     // Validate dates
@@ -60,8 +66,8 @@ console.log(tourData)
   return (
     <div>
       <h2 className="text-center text-4xl my-10">Book Desired Packages</h2>
-      <section className="p-6 dark:bg-gray-100 dark:text-gray-900">
-        <form onSubmit={handleBook} className="max-w-4xl mx-auto space-y-12">
+      <section className="p-6 bg-gray-100 ">
+        <form onSubmit={handleBook} className="max-w-5xl mx-auto space-y-12">
           <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-md shadow-sm bg-white border border-gray-200">
             {/* First Name */}
             <div className="flex flex-col">
@@ -105,15 +111,15 @@ console.log(tourData)
               <input
                 name="email"
                 type="email"
-                placeholder="Email"
+                placeholder={user?.email ||"Email"}
                 required
-                defaultValue={tourData?.email || ""}
+                readOnly
                 className="w-full rounded-md border border-gray-300 p-2 focus:ring focus:ring-yellow-300"
               />
             </div>
 
             {/* Check-In Date */}
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <label className="text-sm mb-1">Check-in Date</label>
               <input
                 name="checkIn"
@@ -123,10 +129,10 @@ console.log(tourData)
                 onChange={(e) => setCheckInDate(e.target.value)}
                 className="w-full rounded-md border border-gray-300 p-2 focus:ring focus:ring-yellow-300"
               />
-            </div>
+            </div> */}
 
             {/* Check-Out Date */}
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <label className="text-sm mb-1">Check-out Date</label>
               <input
                 name="checkOut"
@@ -135,7 +141,7 @@ console.log(tourData)
                 required
                 className="w-full rounded-md border border-gray-300 p-2 focus:ring focus:ring-yellow-300"
               />
-            </div>
+            </div> */}
           </fieldset>
 
           {/* Submit Button */}
