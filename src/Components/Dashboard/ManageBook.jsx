@@ -1,10 +1,18 @@
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 import useBookedStackQuery from "../../Hook/useBookedStackQuery";
 
 const ManageBook = () => {
+    const axiosSecure = useAxiosSecure();
   const [Booking, refetch] = useBookedStackQuery();
 
-  const handleState = (id) => {
-    console.log(id);
+  const handleState =async (value) => {
+   const{booking_states,_id, ...data}=value
+   const sendData={
+    booking_states:"Accept"
+   }
+  const res=await axiosSecure.patch(`/book/${_id}`,sendData) 
+    console.log(res.data)
+    refetch()
   };
 
   return (
@@ -40,7 +48,7 @@ const ManageBook = () => {
                 <td className="py-3 px-4">{item.phone}</td>
                 <td className="py-3 px-4">{item.email}</td>
                 <td
-                  onClick={() => handleState(item._id)}
+                  onClick={() => handleState(item)}
                   className="py-3 px-4 capitalize font-medium"
                 >
                   <button className="py-2 px-5 btn text-blue-600 hover:text-white text-lg font-medium rounded-xl rounded-br-3xl transition-all duration-300  bg-[#daf2fa] hover:bg-[#36b59c] hover:rounded-br-xl  border-none">
