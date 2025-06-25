@@ -49,9 +49,9 @@ const ManageBook = () => {
                 <td className="py-3 px-4">{item.email}</td>
                 <td
                   onClick={() => handleState(item)}
-                  className="py-3 px-4 capitalize font-medium"
+                  className="py-3 px-6 capitalize font-medium"
                 >
-                  <button className="py-2 px-5 btn text-blue-600 hover:text-white text-lg font-medium rounded-xl rounded-br-3xl transition-all duration-300  bg-[#daf2fa] hover:bg-[#36b59c] hover:rounded-br-xl  border-none">
+                  <button className={`${item.booking_states == "Accept" ? "text-white bg-[#36b59c] hover:bg-[#daf2fa] hover:text-blue-600":"bg-[#daf2fa] hover:bg-[#36b59c] text-blue-600"} py-2 px-5 btn hover:text-white text-lg font-medium rounded-xl rounded-br-3xl transition-all duration-300  hover:rounded-br-xl  border-none`}>
                     {item.booking_states}
                   </button>
                 </td>

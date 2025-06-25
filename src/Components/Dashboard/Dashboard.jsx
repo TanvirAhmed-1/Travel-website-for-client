@@ -10,7 +10,7 @@ const Dashboard = () => {
   const { user } = useContext(AuthContext);
   //   const isAdmin = user?.email === "admin@example.com"; // example check
 
-  const isAdmin =true;
+  const isAdmin =false;
 
   return (
     <div className="drawer lg:drawer-open">
