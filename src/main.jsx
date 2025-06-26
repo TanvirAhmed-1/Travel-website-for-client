@@ -25,6 +25,7 @@ import Booking from "./Components/Dashboard/Booking.jsx";
 import ManageBook from "./Components/Dashboard/ManageBook";
 import AdminHome from "./Components/Dashboard/AdminHome.jsx";
 import UsersHome from "./Components/Dashboard/UsersHome.jsx";
+import ContactUs from "./Components/Dashboard/ContactUs.jsx";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/Wishlist",
         element: <Wishlist></Wishlist>,
+      },
+            {
+        path: "/contact",
+        element:<ContactUs></ContactUs>
       },
       {
         path: "/updateuser/:id",

@@ -69,7 +69,7 @@ const Wishlist = () => {
                 <td className="py-3 px-4 text-center">
                   <Link
                     to={`/book/${item.locationId}`}
-                    className=" btn text-black bg-yellow-200  hover:bg-sky-400 transition"
+                    className=" btn text-white bg-blue-600 hover:rounded-lg rounded-xl  hover:bg-sky-400 transition"
                   >
                     Book Now
                   </Link>
@@ -78,7 +78,7 @@ const Wishlist = () => {
                 <td className="py-3 px-4 text-center">
                   <Link
                     to={`/addData/${item.locationId}`}
-                    className=" btn text-black hover:rounded-lg bg-yellow-200  hover:bg-sky-400 transition"
+                    className=" btn text-white hover:rounded-lg rounded-xl bg-blue-600  hover:bg-sky-400 transition"
                   >
                     Details
                   </Link>

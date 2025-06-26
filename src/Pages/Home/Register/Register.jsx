@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import Navbar from "../../../Components/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "animate.css"
 import { FcGoogle } from "react-icons/fc";
 import { toast, ToastContainer } from "react-toastify";
@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 
 const Register = () => {
     const {signUpUser,signInWithGoogle} =useContext(AuthContext);
+    const navigate=useNavigate()
 
     const handleRegister= e=>{
         e.preventDefault();
@@ -21,7 +22,7 @@ const Register = () => {
         signUpUser(email,password)
         .then(res=>{
             console.log(res.user)
-            
+            navigate("/")
         fetch("http://localhost:5000/users",{
             method:"POST",
             headers:{
@@ -32,11 +33,11 @@ const Register = () => {
         .then(res=>res.json())
         .then(data=>{
             console.log(data)
-            Swal.fire({
-              title: "Good job!",
-              text: "You clicked the button!",
-              icon: "success"
-            });
+            // Swal.fire({
+            //   title: "Good job!",
+            //   text: "You clicked the button!",
+            //   icon: "success"
+            // });
         })
         
         })
@@ -54,8 +55,7 @@ const Register = () => {
     )
     }
   return (
-    <div>
-      <Navbar></Navbar>  
+    <div> 
     <div className="hero  min-h-screen ">
        
       <div className="hero-content flex-col lg:flex-row-reverse animate__animated animate__backInDown">

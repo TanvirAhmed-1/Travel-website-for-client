@@ -28,7 +28,6 @@ const Login = () => {
     }
   return (
     <div>
-      <Navbar></Navbar> 
     <div className="hero min-h-screen">
         
       <div className="hero-content flex-col lg:flex-row-reverse animate__animated animate__backInDown">

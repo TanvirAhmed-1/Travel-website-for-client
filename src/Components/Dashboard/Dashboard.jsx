@@ -3,14 +3,17 @@ import { FaBars, FaHome, FaShoppingBag } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import userTanstackQuery from "../../Hook/userTanstackQuery";
 // Adjust path as needed
 
 const Dashboard = () => {
-  // Placeholder isAdmin value for demo; replace with actual logic/hook
-  const { user } = useContext(AuthContext);
-  //   const isAdmin = user?.email === "admin@example.com"; // example check
 
-  const isAdmin =true;
+  const { user } = useContext(AuthContext);
+  const [users, refetch] = userTanstackQuery();
+  const userRole=users.find(v=>v.email === user?.email)
+    const isAdmin = userRole?.role === "Admin";
+
+  // const isAdmin =true;
 
   return (
     <div className="drawer lg:drawer-open">
@@ -79,11 +82,6 @@ const Dashboard = () => {
           <li>
             <NavLink to="/">
               <FaHome className="mr-2" /> Main Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/shop">
-              <FaShoppingBag className="mr-2" /> Shop
             </NavLink>
           </li>
           <li>
