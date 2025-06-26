@@ -10,7 +10,7 @@ const Dashboard = () => {
   const { user } = useContext(AuthContext);
   //   const isAdmin = user?.email === "admin@example.com"; // example check
 
-  const isAdmin =false;
+  const isAdmin =true;
 
   return (
     <div className="drawer lg:drawer-open">
@@ -61,7 +61,7 @@ const Dashboard = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/dashboard/UserHome">
+                <NavLink to="/Dashboard/UserHome">
                   <FaHome className="mr-2" /> Home
                 </NavLink>
               </li>
