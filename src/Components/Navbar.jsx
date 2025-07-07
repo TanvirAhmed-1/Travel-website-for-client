@@ -53,12 +53,27 @@ const Navbar = () => {
         </li>
       </Link>
 
-      {user && (
+      {/* {user && (
         <Link to={isAdmin ? "/Dashboard/AdminHome" : "/Dashboard/UserHome"}>
           <li>
             <h2>Profile</h2>
           </li>
         </Link>
+      )} */}
+      {user && (
+        <div className="flex justify-center items-center">
+          <Link to={"/Dashboard/AdminHome"}>
+            <li>
+              <h2>Admin Profile</h2>
+            </li>
+          </Link>
+
+          <Link to={"/Dashboard/UserHome"}>
+            <li>
+              <h2> User Profile</h2>
+            </li>
+          </Link>
+        </div>
       )}
     </>
   );

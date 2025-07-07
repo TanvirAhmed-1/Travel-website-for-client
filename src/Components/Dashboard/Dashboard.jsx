@@ -7,13 +7,13 @@ import userTanstackQuery from "../../Hook/userTanstackQuery";
 // Adjust path as needed
 
 const Dashboard = () => {
-
   const { user } = useContext(AuthContext);
   const [users, refetch] = userTanstackQuery();
-  const userRole=users.find(v=>v.email === user?.email)
-    const isAdmin = userRole?.role === "Admin";
 
-  // const isAdmin =true;
+  // const userRole = users.find((v) => v.email === user?.email);
+  // const isAdmin = userRole?.role === "Admin";
+
+  const isAdmin = true;
 
   return (
     <div className="drawer lg:drawer-open">
@@ -49,7 +49,7 @@ const Dashboard = () => {
                   <FaHome className="mr-2" /> Manage User
                 </NavLink>
               </li>
-                            <li>
+              <li>
                 <NavLink to="/Dashboard/ManageBook">
                   <FaHome className="mr-2" /> Manage Book
                 </NavLink>
@@ -58,6 +58,11 @@ const Dashboard = () => {
               <li>
                 <NavLink to="/Dashboard/addData">
                   <FaHome className="mr-2" /> Add Place
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/Dashboard/AllPackage">
+                  <FaHome className="mr-2" /> All Package
                 </NavLink>
               </li>
             </>

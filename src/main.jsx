@@ -26,6 +26,8 @@ import ManageBook from "./Components/Dashboard/ManageBook";
 import AdminHome from "./Components/Dashboard/AdminHome.jsx";
 import UsersHome from "./Components/Dashboard/UsersHome.jsx";
 import ContactUs from "./Components/Dashboard/ContactUs.jsx";
+import AllPackage from "./Components/Dashboard/AllPackage.jsx";
+import UpdatePackage from "./Components/Dashboard/UpdatePackage.jsx";
 
 const queryClient = new QueryClient();
 
@@ -51,9 +53,9 @@ const router = createBrowserRouter([
         path: "/Wishlist",
         element: <Wishlist></Wishlist>,
       },
-            {
+      {
         path: "/contact",
-        element:<ContactUs></ContactUs>
+        element: <ContactUs></ContactUs>,
       },
       {
         path: "/updateuser/:id",
@@ -125,9 +127,17 @@ const router = createBrowserRouter([
         path: "/Dashboard/AdminHome",
         element: <AdminHome></AdminHome>,
       },
-            {
+      {
         path: "/Dashboard/UserHome",
-        element:<UsersHome></UsersHome>
+        element: <UsersHome></UsersHome>,
+      },
+      {
+        path: "/Dashboard/AllPackage",
+        element: <AllPackage></AllPackage>,
+      },
+      {
+        path: "/Dashboard/UpdatePackage/:id",
+        element: <UpdatePackage/>
       },
     ],
   },
