@@ -65,6 +65,16 @@ const Dashboard = () => {
                   <FaHome className="mr-2" /> All Package
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/Dashboard/AddGuide">
+                  <FaHome className="mr-2" /> Add Guide
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/Dashboard/manageGuide">
+                  <FaHome className="mr-2" /> Manage Guides
+                </NavLink>
+              </li>
             </>
           ) : (
             <>

@@ -4,34 +4,22 @@ import Swal from "sweetalert2";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import useWishTanStackQuery from "../../Hook/useWishTanStackQuery";
+import { FaHeart, FaMapMarkerAlt } from "react-icons/fa";
 
 const DataCard = ({ data }) => {
-  const{user}=useContext(AuthContext)
-  const [wish,refetch]=useWishTanStackQuery()
+  const { user } = useContext(AuthContext);
+  const [wish, refetch] = useWishTanStackQuery();
   const axiosPublic = useAxiosPublic();
+
   const {
     tour_title,
     tour_location,
-    bus_name,
-    bus_contact,
-    bus_photo,
     tour_cover_photo,
-    hotel_image,
-    hotel_description,
-    hotel_name,
     total_days,
-    tour_manager_contact,
-    tour_manager,
-    ratings,
-    things_to_carry,
-    description,
     places,
-    guide_contact,
-    guide_name,
     price,
     _id,
   } = data;
-
 
   const handleWishlist = async () => {
     const { _id, description, ...data2 } = data;
@@ -39,53 +27,65 @@ const DataCard = ({ data }) => {
     const wishData = {
       ...data2,
       locationId: _id,
-      email:user?.email
+      email: user?.email,
     };
 
-    console.log(wishData)
-  try{
-    const res = await axiosPublic.post("/wish", wishData);
-    console.log(res.data);
-    refetch()
-    if (res.data.insertedId) {
-      Swal.fire({
-        position: "top-cent",
-        icon: "success",
-        title: "Your work has been saved",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+    try {
+      const res = await axiosPublic.post("/wish", wishData);
+      refetch();
+      if (res.data.insertedId) {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Added to wishlist",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
     }
-  }catch(error){
-    console.log(error.message)
-  }
   };
 
   return (
-    <div className="card bg-base-100  shadow-xl">
-      <figure>
-        <img src={tour_cover_photo} alt="Shoes" />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">{tour_title}</h2>
-        <p>Location: {tour_location}</p>
-        <p>Total Days: {total_days}</p>
-        <p>Places: {places}</p>
-        <p className="font-bold text-green-700">Price: {price}</p>
-        <div className="card-actions justify-between items-center">
-          <Link onClick={handleWishlist}>
-            <button className=" py-2 px-4 btn hover:text-white rounded-xl transition-all duration-300 rounded-br-3xl hover:bg-[#143D60] hover:rounded-br-xl  text-lg font-medium  bg-[#A0C878] border-none">
-              Add to Wishlist
-            </button>
-          </Link>
-          <Link to={`/addData/${_id}`}>
-            <button className="py-2 px-5 btn text-black hover:text-white text-lg font-medium rounded-xl rounded-br-3xl transition-all duration-300  bg-[#A1E3F9] hover:bg-[#3674B5] hover:rounded-br-xl  border-none">
-              View Details
-            </button>
-          </Link>
-        </div>
-      </div>
+<div className="w-full sm:max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-2xl shadow-md overflow-hidden transition-all hover:shadow-xl duration-300">
+  <img
+    src={tour_cover_photo}
+    alt={tour_title}
+    className="w-full h-60 object-cover"
+  />
+
+  <div className="p-5 space-y-2">
+    <h2 className="text-xl font-semibold text-gray-800">{tour_title}</h2>
+    <p className="flex items-center text-gray-500">
+      <FaMapMarkerAlt className="mr-1 text-green-600" /> {tour_location}
+    </p>
+    <p className="text-sm text-gray-600">
+      <span className="font-semibold">Total Days:</span> {total_days}
+    </p>
+    <p className="text-sm text-gray-600">
+      <span className="font-semibold">Places:</span> {places}
+    </p>
+    <p className="text-lg text-green-600 font-bold">৳ {price}</p>
+
+    <div className="flex justify-between pt-4">
+      <button
+        onClick={handleWishlist}
+        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-pink-100 hover:bg-pink-200 text-pink-700 transition-all"
+      >
+        <FaHeart className="text-pink-500" />
+        Wishlist
+      </button>
+
+      <Link to={`/addData/${_id}`}>
+        <button className="px-4 py-2 rounded-lg bg-blue-100 hover:bg-blue-600 hover:text-white text-blue-700 transition-all">
+          View Details
+        </button>
+      </Link>
     </div>
+  </div>
+</div>
+
   );
 };
 

@@ -28,6 +28,9 @@ import UsersHome from "./Components/Dashboard/UsersHome.jsx";
 import ContactUs from "./Components/Dashboard/ContactUs.jsx";
 import AllPackage from "./Components/Dashboard/AllPackage.jsx";
 import UpdatePackage from "./Components/Dashboard/UpdatePackage.jsx";
+import AddGuides from "./Components/Dashboard/AddGuides.jsx";
+import ManageGuide from "./Components/Dashboard/ManageGuide.jsx";
+import UpdateGuide from "./Components/Dashboard/UpdateGuide.jsx";
 
 const queryClient = new QueryClient();
 
@@ -137,7 +140,20 @@ const router = createBrowserRouter([
       },
       {
         path: "/Dashboard/UpdatePackage/:id",
-        element: <UpdatePackage/>
+        element: <UpdatePackage />,
+      },
+      {
+        path: "/Dashboard/AddGuide",
+        element: <AddGuides></AddGuides>,
+      },
+
+      {
+        path: "/Dashboard/manageGuide",
+        element: <ManageGuide></ManageGuide>,
+      },
+      {
+        path: "/Dashboard/UpdateGuide/:id",
+        element: <UpdateGuide></UpdateGuide>
       },
     ],
   },

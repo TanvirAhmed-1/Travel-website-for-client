@@ -19,7 +19,7 @@ const Home = () => {
         Our Polpular Packages
       </p>
 
-      <div className="mt-10 grid md:grid-cols-3 gap-2  ">
+      <div className="mt-10 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-4  gap-4  ">
         {data.map((aData) => (
           <DataCard data={aData} key={aData._id}></DataCard>
         ))}
