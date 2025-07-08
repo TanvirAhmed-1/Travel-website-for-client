@@ -57,257 +57,249 @@ const AddData = () => {
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Your work has been saved",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       });
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-100 py-10 px-4">
+      <div className="max-w-7xl mx-auto bg-white p-8 shadow-lg rounded-lg">
+        <h1 className="text-4xl font-bold text-center text-blue-700 mb-10">
+          Add Tour Data
+        </h1>
+        <form
+          onSubmit={handleAdd}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {/** Repeating input fields with same styling */}
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Tour Title</span>
+            <input
+              name="tour_title"
+              type="text"
+              placeholder="Tour Title"
+              className="input input-bordered w-full"
+            />
+          </label>
 
-      <div>
-        <form onSubmit={handleAdd} className="text-center border  p-10 w-full">
-          {/* name */}
-          <h1 className="text-3xl font-bold">ADD DATA</h1>
-          <div className="grid  md:grid-cols-3 lg:grid-cols-3    justify-center">
-            <label className="form-control w-full max-w-xs ">
-              <div className="label">
-                <span className="label-text">Tour Title</span>
-              </div>
-              <input
-                name="tour_title"
-                type="text"
-                placeholder="Tour Title"
-                className="input input-bordered w-full max-w-xs"
-              />
-            </label>
-            <label className="form-control w-full max-w-xs ">
-              <div className="label">
-                <span className="label-text">Tour Location</span>
-              </div>
-              <input
-                name="tour_location"
-                type="text"
-                placeholder="location"
-                className="input input-bordered w-full max-w-xs"
-              />
-            </label>
-            <label className="form-control w-full max-w-xs ">
-              <div className="label">
-                <span className="label-text">Bus Name</span>
-              </div>
-              <input
-                name="bus_name"
-                type="text"
-                placeholder="Bus Name"
-                className="input input-bordered w-full max-w-xs"
-              />
-            </label>
-            <label className="form-control w-full max-w-xs ">
-              <div className="label">
-                <span className="label-text">Bus Contact</span>
-              </div>
-              <input
-                name="bus_contact"
-                type="text"
-                placeholder="Bus Contact"
-                className="input input-bordered w-full max-w-xs"
-              />
-            </label>
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Tour Location</span>
+            <input
+              name="tour_location"
+              type="text"
+              placeholder="Location"
+              className="input input-bordered w-full"
+            />
+          </label>
 
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Guide Name</span>
-              </div>
-              <input
-                name="guide_name"
-                type="text"
-                placeholder="Guide Name"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Guide Contact</span>
-              </div>
-              <input
-                name="guide_contact"
-                type="text"
-                placeholder="Guide Contact"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Places</span>
-              </div>
-              <input
-                name="places"
-                type="text"
-                placeholder="Places"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Description</span>
-              </div>
-              <input
-                name="description"
-                type="text"
-                placeholder="Description"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Things To Carry</span>
-              </div>
-              <input
-                name="things_to_carry"
-                type="text"
-                placeholder="Things To Carry"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Ratings</span>
-              </div>
-              <input
-                name="ratings"
-                type="text"
-                placeholder="Ratings"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Tour Manager</span>
-              </div>
-              <input
-                name="tour_manager"
-                type="text"
-                placeholder="Tour Manager"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Tour Manager Contact</span>
-              </div>
-              <input
-                name="tour_manager_contact"
-                type="text"
-                placeholder="Tour Manager Contact"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Total Days</span>
-              </div>
-              <input
-                name="total_days"
-                type="text"
-                placeholder="Total Days"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Hotel Name</span>
-              </div>
-              <input
-                name="hotel_name"
-                type="text"
-                placeholder="Hotel Name"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Hotel Description</span>
-              </div>
-              <input
-                name="hotel_description"
-                type="text"
-                placeholder="Hotel Description"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Hotel Image</span>
-              </div>
-              <input
-                name="hotel_image"
-                type="text"
-                placeholder="Hotel Image URL"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Tour Cover Photo</span>
-              </div>
-              <input
-                name="tour_cover_photo"
-                type="text"
-                placeholder="Tour Cover URL"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Bus Photo</span>
-              </div>
-              <input
-                name="bus_photo"
-                type="text"
-                placeholder="Bus Photo"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Price</span>
-              </div>
-              <input
-                name="price"
-                type="text"
-                placeholder="Price"
-                className="input input-bordered w-full max-w-xs"
-                required
-              />
-            </label>
-          </div>
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Bus Name</span>
+            <input
+              name="bus_name"
+              type="text"
+              placeholder="Bus Name"
+              className="input input-bordered w-full"
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Bus Contact</span>
+            <input
+              name="bus_contact"
+              type="text"
+              placeholder="Bus Contact"
+              className="input input-bordered w-full"
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Guide Name</span>
+            <input
+              name="guide_name"
+              type="text"
+              placeholder="Guide Name"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Guide Contact</span>
+            <input
+              name="guide_contact"
+              type="text"
+              placeholder="Guide Contact"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Places</span>
+            <input
+              name="places"
+              type="text"
+              placeholder="Places"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Description</span>
+            <input
+              name="description"
+              type="text"
+              placeholder="Description"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">
+              Things To Carry
+            </span>
+            <input
+              name="things_to_carry"
+              type="text"
+              placeholder="Things To Carry"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Ratings</span>
+            <input
+              name="ratings"
+              type="text"
+              placeholder="Ratings"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Tour Manager</span>
+            <input
+              name="tour_manager"
+              type="text"
+              placeholder="Tour Manager"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">
+              Manager Contact
+            </span>
+            <input
+              name="tour_manager_contact"
+              type="text"
+              placeholder="Manager Contact"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Total Days</span>
+            <input
+              name="total_days"
+              type="text"
+              placeholder="Total Days"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Hotel Name</span>
+            <input
+              name="hotel_name"
+              type="text"
+              placeholder="Hotel Name"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">
+              Hotel Description
+            </span>
+            <input
+              name="hotel_description"
+              type="text"
+              placeholder="Hotel Description"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Hotel Image</span>
+            <input
+              name="hotel_image"
+              type="text"
+              placeholder="Hotel Image URL"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">
+              Tour Cover Photo
+            </span>
+            <input
+              name="tour_cover_photo"
+              type="text"
+              placeholder="Tour Cover URL"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Bus Photo</span>
+            <input
+              name="bus_photo"
+              type="text"
+              placeholder="Bus Photo URL"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+
+          <label className="form-control w-full">
+            <span className="label-text font-semibold mb-1">Price</span>
+            <input
+              name="price"
+              type="text"
+              placeholder="Price"
+              className="input input-bordered w-full"
+              required
+            />
+          </label>
+        </form>
+
+        <div className="text-center mt-10">
           <input
             type="submit"
-            className="btn btn-primary mt-10 w-full"
             value="ADD"
+            className="btn btn-primary px-10 text-lg tracking-wide"
           />
-        </form>
+        </div>
       </div>
     </div>
   );

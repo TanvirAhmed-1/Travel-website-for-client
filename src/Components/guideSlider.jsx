@@ -1,80 +1,74 @@
 import React from "react";
-
-import { SwiperSlide, Swiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
 import "swiper/css";
-import { Carousel } from "flowbite-react";
+import "swiper/css/pagination";
+import useGuideHook from "../Hook/useGuideHook";
 
 const GuideSlider = () => {
+  const [guides] = useGuideHook();
+
   return (
-    <div>
-      {/* <div className="grid grid-cols-2 lg:grid-cols-5 gap-2 sm:h-64 xl:h-80 2xl:h-96">
-        
-       <Carousel leftControl="none" rightControl="right">
-        <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
-      </Carousel>
-       <Carousel className='w-48 h-56 mx-auto' indicators={false}>
-        <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
-      </Carousel>
-       <Carousel className='w-48 h-56 mx-auto' indicators={false}>
-        <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
-      </Carousel>
-       <Carousel className='w-48 h-56 mx-auto' indicators={false}>
-        <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
-      </Carousel>
-       <Carousel className='w-48 h-56 mx-auto' indicators={false}>
-        <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
-      </Carousel>
-       
-        </div> */}
-      <h2 className="text-center text-4xl mt-10">Popular Guides</h2>
-      <div className="relative w-full flex gap-4 py-6 overflow-x-auto mt-10">
-        <img
-          className="h-48 relative aspect-video rounded-sm object-cover object-center dark:bg-gray-500"
-          src="https://i.ibb.co.com/hrVYLsW/person1.jpg"
-          alt="Image 1"
-        />{" "}
-        <p className="absolute text-white bottom-8">Imadul</p>
-        <img
-          className="h-48 aspect-video rounded-sm object-cover object-center dark:bg-gray-500"
-          src="https://source.unsplash.com/random/241x361/?2"
-          alt="Image 2"
-        />
-        <img
-          className="h-48 aspect-video rounded-sm object-cover object-center dark:bg-gray-500"
-          src="https://source.unsplash.com/random/241x361/?3"
-          alt="Image 3"
-        />
-        <img
-          className="h-48 aspect-video rounded-sm object-cover object-center dark:bg-gray-500"
-          src="https://source.unsplash.com/random/241x361/?4"
-          alt="Image 4"
-        />
-        <img
-          className="h-48 aspect-video rounded-sm object-cover object-center dark:bg-gray-500"
-          src="https://source.unsplash.com/random/241x361/?5"
-          alt="Image 5"
-        />
-      </div>
+    <div className="py-14 px-4 lg:px-20 bg-gradient-to-b from-blue-50 to-white">
+      <h2 className="text-4xl font-bold text-center text-blue-800 mb-12">
+        Our Professional Guides
+      </h2>
+
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={20}
+        pagination={{ clickable: true }}
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
+        modules={[Pagination]}
+        className="mySwiper"
+      >
+        {guides?.map((guide) => (
+          <SwiperSlide key={guide._id}>
+            <div className="bg-white shadow-md rounded-2xl overflow-hidden p-6 flex flex-col items-center transition duration-300 hover:shadow-xl h-full">
+              <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-blue-600 shadow-md">
+                <img
+                  src={guide.image}
+                  alt={guide.name}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+
+              <h3 className="mt-4 text-lg font-bold text-gray-800">
+                {guide.name}
+              </h3>
+              <p className="text-sm mt-3 text-gray-600">Email: {guide.email}</p>
+              <p className="text-sm text-gray-600 my-2">Phone: {guide.phone}</p>
+
+              <div className="text-center text-gray-600  text-sm">
+                <p className="italic">Speaks: {guide.languages}</p>
+                <p className="italic my-1">Experience: {guide.experience} Year</p>
+              </div>
+
+              <div className="flex flex-wrap gap-2 justify-center text-sm mt-3">
+                <span
+                  className={`px-3 py-1 rounded-full text-white ${
+                    guide.isAvailable === "true" ? "bg-green-500" : "bg-red-400"
+                  }`}
+                >
+                  {guide.isAvailable === "true" ? "Available" : "Unavailable"}
+                </span>
+
+                <span className="bg-yellow-500 text-white px-3 py-1 rounded-full">
+                  ★ {guide.rating}
+                </span>
+
+                <span className="bg-blue-500 text-white px-3 py-1 rounded-full">
+                  {guide.availabilityType}
+                </span>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };

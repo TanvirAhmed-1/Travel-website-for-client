@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAllPAckageData from "../../Hook/useAllPAckageData";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
@@ -9,6 +9,7 @@ const UpdatePackage = () => {
   const { id } = useParams();
   const [formData, setFormData] = useState(null);
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const found = Package.find((v) => v._id === id);
@@ -22,11 +23,13 @@ const UpdatePackage = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+
+    const { _id, ...updateData } = formData;
     try {
-      const res = await axiosSecure.patch(`/addData/${id}`, formData);
+      const res = await axiosSecure.patch(`/addData/${id}`, updateData);
       console.log(res.data);
       refetch();
-      if (1) {
+      if (res.data.modifiedCount > 0) {
         Swal.fire({
           position: "center",
           icon: "success",
@@ -34,6 +37,7 @@ const UpdatePackage = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        navigate("/Dashboard/AllPackage");
       }
     } catch (error) {
       console.log(error.message);

@@ -56,7 +56,7 @@ const ManageGuide = () => {
                   <img
                     src={guide.image}
                     alt={guide.name}
-                    className="w-14 h-14 rounded-full object-cover border shadow"
+                    className="w-20 h-12 rounded-xl object-cover border shadow"
                   />
                 </td>
                 <td>{guide.name}</td>

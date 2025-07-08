@@ -2,12 +2,7 @@
 import { Link } from "react-router-dom";
 
 const UserManagementNavbar = () => {
-    // const navLinks=<>
-    // <Link to={'/usermanagement'}><li><h2>Admin Home</h2></li></Link>
-    // <Link to={'/'}><li><h2>Client Home</h2></li></Link>
-    // <Link to={'/userslist'}><li><h2>Users List</h2></li></Link>
-    // <Link to={'/addData'}><li><h2>Add Data</h2></li></Link>
-    // </>
+  
 
 
   return (
