@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
-import useAllPAckageData from "../../Hook/useAllPAckageData";
 import { useEffect, useState } from "react";
-import useAxiosSecure from "../../Hook/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAllPAckageData from './../Hook/useAllPAckageData';
+import useAxiosSecure from "../Hook/useAxiosSecure";
 
 const UpdatePackage = () => {
   const [Package, refetch] = useAllPAckageData();

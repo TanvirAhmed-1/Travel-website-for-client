@@ -1,9 +1,9 @@
 import { FaPen, FaPencilAlt } from "react-icons/fa";
-import useAllPAckageData from "../../Hook/useAllPAckageData";
 import { MdDeleteForever } from "react-icons/md";
-import useAxiosSecure from "../../Hook/useAxiosSecure";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAllPAckageData from "../Hook/useAllPAckageData";
+import useAxiosSecure from "../Hook/useAxiosSecure";
 
 const AllPackage = () => {
   const [Package, refetch] = useAllPAckageData();

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Providers/AuthProvider";
-import useAxiosSecure from "../../Hook/useAxiosSecure";
+import { AuthContext } from "../Providers/AuthProvider";
+import useAxiosSecure from "../Hook/useAxiosSecure";
 import { FaUser, FaBoxOpen, FaHeart, FaBookOpen } from "react-icons/fa";
 import {
   BarChart,

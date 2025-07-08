@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import useAxiosSecure from "../../Hook/useAxiosSecure";
-import { AuthContext } from "../../Providers/AuthProvider";
 import { FaBookOpen } from "react-icons/fa";
+import useAxiosSecure from "../Hook/useAxiosSecure";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const UserHome = () => {
   const axiosSecure = useAxiosSecure();

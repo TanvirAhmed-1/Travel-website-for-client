@@ -32,7 +32,7 @@ const Wishlist = () => {
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
           <thead>
-            <tr className="bg-blue-600 text-white">
+            <tr className="bg-blue-500 text-white">
               <th className="py-3 px-4 text-left">#</th>
               <th className="py-3 px-4 text-left">Image</th>
               <th className="py-3 px-4 text-left">Tour Title</th>

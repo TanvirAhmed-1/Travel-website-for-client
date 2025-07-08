@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Link, useLoaderData } from "react-router-dom";
 
 const DataDetails = () => {
@@ -29,7 +29,6 @@ const DataDetails = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* Hero Image & Title */}
       <div className="relative w-full h-[300px] md:h-[450px] lg:h-[500px] overflow-hidden rounded-b-2xl shadow-md">
         <img
           src={tour_cover_photo}

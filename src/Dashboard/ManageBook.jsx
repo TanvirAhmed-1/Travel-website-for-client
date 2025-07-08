@@ -1,21 +1,20 @@
-import useAxiosSecure from "../../Hook/useAxiosSecure";
-import useBookedStackQuery from "../../Hook/useBookedStackQuery";
+
+import useAxiosSecure from "../Hook/useAxiosSecure";
+import useBookedStackQuery from './../Hook/useBookedStackQuery';
 
 const ManageBook = () => {
-    const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
   const [Booking, refetch] = useBookedStackQuery();
 
-  const handleState =async (value) => {
-   const{booking_states,_id, ...data}=value
-   const sendData={
-    booking_states:"Accept"
-   }
-  const res=await axiosSecure.patch(`/book/${_id}`,sendData) 
-    console.log(res.data)
-    refetch()
+  const handleState = async (value) => {
+    const { booking_states, _id, ...data } = value;
+    const sendData = {
+      booking_states: "Accept",
+    };
+    const res = await axiosSecure.patch(`/book/${_id}`, sendData);
+    console.log(res.data);
+    refetch();
   };
-
-  console.log(Booking)
 
   return (
     <div className="p-6">
@@ -53,7 +52,13 @@ const ManageBook = () => {
                   onClick={() => handleState(item)}
                   className="py-3 px-6 capitalize font-medium"
                 >
-                  <button className={`${item.booking_states == "Accept" ? "text-white bg-[#36b59c] hover:bg-[#36b59c]  hover:text-blue-600":"bg-[#daf2fa] hover:bg-[#36b59c] text-blue-600"} py-2 px-5 btn hover:text-white text-lg font-medium rounded-xl rounded-br-3xl transition-all duration-300  hover:rounded-br-xl  border-none`}>
+                  <button
+                    className={`${
+                      item.booking_states == "Accept"
+                        ? "text-white bg-[#36b59c] hover:bg-[#36b59c]  hover:text-blue-600"
+                        : "bg-[#daf2fa] hover:bg-[#36b59c] text-blue-600"
+                    } py-2 px-5 btn hover:text-white text-lg font-medium rounded-xl rounded-br-3xl transition-all duration-300  hover:rounded-br-xl  border-none`}
+                  >
                     {item.booking_states}
                   </button>
                 </td>

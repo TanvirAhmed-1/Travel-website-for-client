@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import useAxiosSecure from "../../Hook/useAxiosSecure";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../Hook/useAxiosSecure";
 
 const Booking = () => {
   const axiosSecure = useAxiosSecure();

@@ -2,18 +2,19 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FaBars, FaHome, FaShoppingBag } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useContext } from "react";
-import { AuthContext } from "../../Providers/AuthProvider";
-import userTanstackQuery from "../../Hook/userTanstackQuery";
+
+import { AuthContext } from "../Providers/AuthProvider";
+import userTanstackQuery from "../Hook/userTanstackQuery";
 // Adjust path as needed
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
   const [users, refetch] = userTanstackQuery();
 
-  // const userRole = users.find((v) => v.email === user?.email);
-  // const isAdmin = userRole?.role === "Admin";
+  const userRole = users.find((v) => v.email === user?.email);
+  const isAdmin = userRole?.role === "Admin";
 
-  const isAdmin = true;
+  //const isAdmin = true;
 
   return (
     <div className="drawer lg:drawer-open">

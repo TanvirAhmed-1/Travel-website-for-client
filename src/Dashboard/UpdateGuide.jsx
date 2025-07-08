@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import useAxiosSecure from "../../Hook/useAxiosSecure";
+
 import Swal from "sweetalert2";
+import useAxiosSecure from "../Hook/useAxiosSecure";
 
 const UpdateGuide = () => {
   const { id } = useParams();

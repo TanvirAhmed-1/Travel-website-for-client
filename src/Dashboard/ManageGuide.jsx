@@ -1,8 +1,8 @@
 import { FaTrash, FaEdit } from "react-icons/fa"; // Icons
-import useGuideHook from "../../Hook/useGuideHook";
-import useAxiosSecure from "../../Hook/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import useGuideHook from "../Hook/useGuideHook";
+import useAxiosSecure from "../Hook/useAxiosSecure";
 
 const ManageGuide = () => {
   const [guides, refetch] = useGuideHook();

@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../../../Providers/AuthProvider";
-import Navbar from "../../../Components/Navbar";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Navbar from "../../Components/Navbar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "animate.css";
 import { FcGoogle } from "react-icons/fc";
 import { toast, ToastContainer } from "react-toastify";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../../Hook/useAxiosPublic";
+import useAxiosPublic from "../../Hook/useAxiosPublic";
 
 const Register = () => {
   const { signUpUser, signInWithGoogle } = useContext(AuthContext);
